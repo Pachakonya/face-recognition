@@ -1,4 +1,5 @@
 import cv2
+import os
 
 alg = "/Users/sugirbay/face_recognition/haarcascade_frontalface_default.xml"
 haar_cascade = cv2.CascadeClassifier(alg)
@@ -25,7 +26,8 @@ from PIL import Image
 import psycopg2
 import os
 
-conn = psycopg2.connect("postgres://avnadmin:AVNS_GBFtYZZ0J-QLFN5dLVV@pg-3b146124-faces02123.c.aivencloud.com:17875/defaultdb?sslmode=require")
+password = os.environ.get('AIVEN_PASSWORD')
+conn = psycopg2.connect(password)
 
 for filename in os.listdir("stored-faces"):
     img = Image.open("stored-faces/" + filename)
